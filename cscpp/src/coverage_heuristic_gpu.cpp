@@ -175,7 +175,7 @@ int main( int argc, char **  argv)
     //find the path and print it
     //******************************************************************
     ros::Time timer_restart = ros::Time::now();
-    Node * path = pathPlanner->startSearch(start);
+    Node * path = pathPlanner->startSearch(start,continuous);
     ros::Time timer_end = ros::Time::now();
     std::cout<<"\nPath Finding took:"<<double(timer_end.toSec() - timer_restart.toSec())<<" secs";
 

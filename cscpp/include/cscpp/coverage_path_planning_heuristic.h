@@ -77,7 +77,7 @@ namespace SSPP
 class CoveragePathPlanningHeuristic:public Heuristic
 {
 public:
-    CoveragePathPlanningHeuristic(ros::NodeHandle & nh, std::string collisionCheckModelP, std::string occlusionCullingModelN, bool d,bool gradualV, int hType);
+    CoveragePathPlanningHeuristic(ros::NodeHandle & nh, std::string collisionCheckModelP, std::string occlusionCullingModelN, bool d,bool gradualV, int hType, int HorizFOV, int VertFOV, double NearPlaneDist, double FarPlaneDist, double voxelresolution);
     ~CoveragePathPlanningHeuristic();
     bool isCost();
     void setCoverageTarget(double coverageTarget);
@@ -96,6 +96,8 @@ public:
     void findClusterOuterPoints(geometry_msgs::PoseArray waypoints, pcl::PointCloud<pcl::PointXYZ>& cloudHull);
     void findClusterBB(pcl::PointCloud<pcl::PointXYZ> clusterPoints, geometry_msgs::Vector3 &gridSize, geometry_msgs::Pose &gridStart);
     int getHeuristicType();
+    std::vector<Eigen::Vector3f> ListofNodes; // Added Line
+    bool CheckRepeatPoint(std::vector<Eigen::Vector3f>& ListofNodes, Eigen::Vector3f nodecoords);// Added Line
 private:
     void loadOBJFile(const char* filename, std::vector<Eigen::Vector3f>& points, std::list<CGALTriangle>& triangles);
     OcclusionCulling* occlussionCulling;
@@ -129,6 +131,7 @@ private:
     pcl::PointCloud<pcl::PointXYZ> modelVoxels;
     pcl::PointCloud<pcl::PointXYZ> modelVoxelsForConn;
     Tree1* cgalTree;
+    double maxCov;
 
 };
 

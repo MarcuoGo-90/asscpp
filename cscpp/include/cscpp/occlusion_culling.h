@@ -34,6 +34,8 @@
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
 
+#include <vector>
+
 //PCL
 #include <iostream>
 #include <pcl/io/pcd_io.h>
@@ -74,7 +76,7 @@ public:
     std::string frame_id;
 
     //methods
-    OcclusionCulling(ros::NodeHandle & n, std::string modelName);
+    OcclusionCulling(ros::NodeHandle & n, std::string modelName, int HorizFOV, int VertFOV, double NearPlaneDist, double FarPlaneDist, double voxelresolution);
     OcclusionCulling(ros::NodeHandle & n, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloudPtr);
     OcclusionCulling(std::string modelName);
     OcclusionCulling();

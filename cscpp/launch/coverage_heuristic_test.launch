@@ -1,5 +1,87 @@
 <?xml version="1.0"?>
 <launch>
+    <!-- Choose which model to plan around -->
+    <arg name="model_name" default="F35origin" /> <!--F35origin, F35, F15scaled F15, A340, Hoa, x35-->
+    <arg name="obj_name" default="F35originStayAway" /> 
+
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find cscpp)/rviz/sspp_coverage_heuristic.rviz"/>
-    <node pkg="cscpp" type="coverage_heuristic_test" name="coverage_heuristic_test" />
+    <node pkg="cscpp" type="coverage_heuristic_test" name="coverage_heuristic_test" output="screen">
+        <!-- Change Simulation model parameters HERE-->
+        
+        <!-- ******* General  Params************-->
+        <param name="Model_PCD" type="string" value="$(arg model_name)"/>  <!--in cscpp/pcd -->
+        <param name="Model_OBJ" type="string" value="$(arg obj_name)" /> <!--in cscpp/mesh-->
+        <param name="Target_Coverage" type="double" value="64" />
+        <param name="CovTolerance" type="double" value="1.0" />
+        <param name="continuous" type="bool" value="false" /> <!-- if True, path will only have a single orientation per point -->
+        <param name="wait_time" type="double" value="1.0" /> 
+        <param name="Debug" type="bool" value="false" />
+        <param name="voxelresolution" type="double" value="0.1" /> <!-- Changes the Voxel size for the Occlusion culling. used in CPPH lines 49/55 and OC line 41 -->
+        <param name="HeuristicType" type="int" value="5" />
+
+        <!-- ************ UAV Specific Params ************-->
+        <param name="UAV_start_X" type="double" value="-2.0" /> 
+        <param name="UAV_start_Y" type="double" value="0.0" />  
+        <param name="UAV_start_Z" type="double" value="3.0" />  
+        <param name="UAV_end_X" type="double" value="0.0" />  
+        <param name="UAV_end_Y" type="double" value="0.0" />  
+        <param name="UAV_end_Z" type="double" value="0.0" />
+
+        <!-- ************ Search Space Parameters *******-->
+        <param name="min_dist" type="double" value="1.0" />  
+        <param name="max_dist" type="double" value="3.0" />  <!-- Make sure FarPlaneDist supports this distance -->
+        <param name="res_start" type="double" value="1.5" />
+        <param name="res_decrement" type="double" value="0.5" />
+        <param name="connection_radius" type="double" value="2.43" />
+        <param name="Orientation_Resolution" type="double" value="45" />
+        <param name="gridstartX" type="double" value="-20.0" />   <!-- -->
+        <param name="gridstartY" type="double" value="-10.0" />   <!-- -->
+        <param name="gridstartZ" type="double" value="10" />   <!-- -->
+        <param name="gridsizeX" type="double" value="40.0" />   <!-- -->
+        <param name="gridsizeY" type="double" value="20.0" />   <!-- -->
+        <param name="gridsizeZ" type="double" value="20.0" />   <!-- -->
+
+        <!-- ************ Sensor Params ************-->
+        <param name="HorizFOV" type="int" value="57" />
+        <param name="VertFOV" type="int" value="44" />
+        <param name="FocalLength" type="double" value="0.08" />  <!-- meters -->
+        <param name="NearPlaneDist" type="double" value="0.4" /> <!-- meters -->
+        <param name="FarPlaneDist" type="double" value="6.0" /> <!--  meters -->
+        <param name="PixWidth" type="int" value="1600" />  <!-- pixels -->
+        <param name="PixHeight" type="int" value="1200" /> <!-- pixels -->
+        <param name="SensorPoseX" type="double" value="0.122555" />  <!-- meters away from origin in X direction  -->
+        <param name="SensorPoseY" type="double" value="0.0" /> <!-- meters away from origin in Y direction -->
+        <param name="SensorPoseZ" type="double" value="-0.0762" /> <!-- meters away from origin in Z direction (negative=down) -0.065-->
+        <param name="SensorRoll" type="double" value="0.0" /> <!-- radians -->
+        <param name="SensorYaw" type="double" value="0.0" /> <!-- radians -->
+        <param name="SensorPitch" type="double" value="0.523599" /> <!-- radians (positive is down for some reason) 
+        15 = 0.261799  
+        20 = 0.349066
+        25 = 0.436332
+        30 = 0.523599
+        45 = 0.785398-->
+
+
+        <!--
+        HeuristicType:
+            0:SurfaceCoverageH
+            1:SurfaceCoveragewithOrientationH
+            2:SurfaceCoveragewithAccuracyH
+            3:SurfaceAreaCoverageH (commented out, won't work)
+            4:VolumetricCoverageH
+            5:InfoGainVolumetricH
+
+        res_start : Adjusts how close together the Search Space nodes
+        res_decrement : decreases starting resolution by this amount
+        connection_radius :
+        min_dist : how close to the model the Search space nodes can be
+        max_dist : how far away from the model the Search space nodes can be
+        Orientation_Resolution : How many degrees you want to discretize the possible sensor locations by (if 45, the possible sensor locations will be 0/45/90/135/etc, if 60 then 0/60/120/etc)
+        gridstartZ : To get the search space above a certain point in the Z dir, add gridsizeZ/2 to how high you want the search space to start
+
+        -->
+        
+       
+
+    </node>
 </launch>

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Choose which model to plan around -->
+    <arg name="model_name" default="F35" />
+    <arg name="mav_name" default="iris" /> <!-- Choose the default UAV -->
+    <arg name="world_name" default="$(arg model_name)" />  <!-- Choose the default World. could be "basic" -->
+    <arg name="UAV_start_X" default="-7.0" />
+    <arg name="UAV_start_Y" default="0.0" />
+    <arg name="UAV_start_Z" default="3.0" />
+    <arg name="Target_Coverage" default="89" /> <!-- Don't put .0 (helps read file name) -->
+    <arg name="connection_radius" default="2.5" />
+    <arg name="file_name" default="$(arg model_name)_$(arg Target_Coverage)%_$(arg connection_radius)GridConRad.txt" />
+
+
+
+    <!-- Not entirely sure what each of these arguments are, but... -->
+    <arg name="enable_logging" default="false" />
+    <arg name="enable_ground_truth" default="true" />
+    <arg name="useValgrind" default="false" />
+    <arg name="log_file" default="$(arg mav_name)" />
+    <arg name="debug" default="false" /> <!-- enables debugging if true -->
+    <arg name="pause" default="false" /> <!-- if "true" the simulation starts paused -->
+    <arg name="gui" default="true" /> <!-- enables a gui -->
+
+    <!-- Fake transform from world origin to robot origin (base). Allows the UAV TF to be shown in RVIZ -->
+    <node pkg="tf" type="static_transform_publisher" name="base_to_map" args="0 0 0 0 0 0 /world /map 30" />
+
+    <!-- Load the World into the simulator-->
+    <!-- Model folder must be in ~/catkin_ws/src/f35sim/models -->
+    <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find f35sim)/models"/>
+    <!-- Looks in ~/catkin_ws/src/f35sim/models for models-->
+    <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find f35sim)/models"/>
+    <!-- Looks in /opt/ros/melodic/share/gazebo_ros/launch -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find f35sim)/worlds/$(arg world_name).world" />  <!-- looks for world in ~catkin_ws/src/f35sim/worlds and loads it -->
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg pause)" />
+        <arg name="use_sim_time" value="true" />
+    </include>
+
+    <!--  Inputs the MAV to the simulator-->
+    <group ns="$(arg mav_name)">
+        <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+            <arg name="mav_name" value="$(arg mav_name)" />
+            <arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
+            <arg name="enable_logging" value="$(arg enable_logging)" />
+            <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+            <arg name="log_file" value="$(arg log_file)"/>
+            <arg name="x" default="$(arg UAV_start_X)"/>
+            <arg name="y" default="$(arg UAV_start_Y)"/>
+            <arg name="z" default="$(arg UAV_start_Z)"/>
+        </include>
+        <!--  Activates the lee_position_controller_node so that XXX can happen and load the associated UAV parameters-->
+        <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
+            <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
+            <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+            <remap from="odometry" to="odometry_sensor1/odometry" />
+        </node>
+
+        <!--  Engages the UAV's motors and puts it into a hover  -->
+        <node name="hovering_example" pkg="rotors_gazebo" type="hovering_example" output="screen" >
+            <param name="x" type="double" value="$(arg UAV_start_X)" />
+            <param name="y" type="double" value="$(arg UAV_start_Y)" />
+            <param name="z" type="double" value="$(arg UAV_start_Z)" />
+        </node>
+
+        <!-- Uses a specified waypoint publisher to publish a text file of waypoints -->
+        <node name="waypoint_publisher_file" pkg="rotors_gazebo" type="waypoint_publisher_file" output="screen" args="$(find cscpp)/txt/$(arg file_name)"> <!--args="$(find cscpp)/txt/2.5_50%path_newtests1to4_F35.pcdscaledGPU_NewIG_Dynamic_dsscpp_tt.txt" ooor "$(find f35sim)/txt/example_waypoints.txt" or "$(find cscpp)/txt/$(arg connection_radius)_$(arg Target_Coverage)%path_newtests1to4_$(model_name)scaledGPU_NewIG_Dynamic_dsscpp_tt.txt"  oooor args="$(find rotors_gazebo)/resource/example_waypoints.txt"-->
+        </node>
+
+        <!-- send fake joint values -->
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+        <!-- Combine joint values -->
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    </group>
+
+</launch>

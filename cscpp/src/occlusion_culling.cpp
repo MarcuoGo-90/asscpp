@@ -23,13 +23,13 @@
 #include "cscpp/occlusion_culling.h"
 
 
-OcclusionCulling::OcclusionCulling(ros::NodeHandle &n, std::string modelName):
+OcclusionCulling::OcclusionCulling(ros::NodeHandle &n, std::string modelName, int HorizFOV, int VertFOV, double NearPlaneDist, double FarPlaneDist, double voxelresolution):
     nh(n),
     model(modelName),
     fc(true)
 {
 
-   fov_pub = n.advertise<visualization_msgs::MarkerArray>("fov", 10);
+   ros::Publisher fov_pub = n.advertise<visualization_msgs::MarkerArray>("fov", 10);
    cloud = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud <pcl::PointXYZ>);
    cloudCopy = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud <pcl::PointXYZ>);
    filtered_cloud = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud <pcl::PointXYZ>);
@@ -38,7 +38,7 @@ OcclusionCulling::OcclusionCulling(ros::NodeHandle &n, std::string modelName):
    FrustumCloud = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud <pcl::PointXYZ>);
    pcl::io::loadPCDFile<pcl::PointXYZ> (model, *cloud);
    cloudCopy->points = cloud->points;
-   voxelRes = 0.5f;
+   voxelRes = voxelresolution; // change the voxel resolution to adjust the fidelity of the Occlusion. Also at coverage_path_planning_heuristic.cpp line 49/55
    OriginalVoxelsSize=0.0;
    id=0.0;
    viewEntropy=0.0;
@@ -70,10 +70,10 @@ OcclusionCulling::OcclusionCulling(ros::NodeHandle &n, std::string modelName):
    voxelgrid.filter (*filtered_cloud);
 
    fc.setInputCloud (cloud);
-   fc.setVerticalFOV (45);
-   fc.setHorizontalFOV (58);
-   fc.setNearPlaneDistance (0.7);
-   fc.setFarPlaneDistance (6.0);
+   fc.setVerticalFOV (VertFOV);
+   fc.setHorizontalFOV (HorizFOV);
+   fc.setNearPlaneDistance (NearPlaneDist);
+   fc.setFarPlaneDistance (FarPlaneDist);
 
    AccuracyMaxSet = false;
 }
@@ -399,6 +399,7 @@ float OcclusionCulling::calcCoveragePercent(pcl::PointCloud<pcl::PointXYZ>::Ptr 
 //        Eigen::Vector3i  max_b1 = voxelFilterOriginal.getMaxBoxCoordinates ();
 
     float MatchedVoxels=0 ;//OriginalVoxelsSize=0, ;
+    std::vector<int> MatchedVoxelIndexList; // Added line 
 
     //iterate through the entire coverage grid to check the number of matched voxel between the original and the covered ones
     for (int kk = min_b.z (); kk <= max_b.z (); ++kk)
@@ -420,21 +421,25 @@ float OcclusionCulling::calcCoveragePercent(pcl::PointCloud<pcl::PointXYZ>::Ptr 
                     if(index!=-1)
                     {
                         MatchedVoxels++;
+                        MatchedVoxelIndexList.push_back(index); // Added line 
                     }
                 }
 
             }
         }
     }
+    // std::cout<<" the Matched Voxel Index List is = "<<MatchedVoxelIndexList.size()<<"\n"; // Added line 
+    // for (auto i = MatchedVoxelIndexList.begin(); i != MatchedVoxelIndexList.end(); ++i) // Added line 
+    // std::cout << *i << ' '; // Added line 
 
-    //calculating the coverage percentage
+    // calculating the coverage percentage
     float coverage_ratio= MatchedVoxels/OriginalVoxelsSize;
     float coverage_percentage= coverage_ratio*100;
 
 //    std::cout<<" the coverage ratio is = "<<coverage_ratio<<"\n";
-//    std::cout<<" the number of covered voxels = "<<MatchedVoxels<<" voxel is covered"<<"\n";
-//    std::cout<<" the number of original voxels = "<<OriginalVoxelsSize<<" voxel"<<"\n\n\n";
-//    std::cout<<" the coverage percentage is = "<<coverage_percentage<<" %"<<"\n";
+   std::cout<<"The number of covered voxels = "<<MatchedVoxels<<"\n";
+   // std::cout<<" the number of original voxels = "<<OriginalVoxelsSize<<" voxel"<<"\n\n\n";
+//   std::cout<<"The coverage percentage is "<<coverage_percentage<<" %"<<"\n";
 
     ros::Time covpercent_end = ros::Time::now();
     double elapsed =  covpercent_end.toSec() - covpercent_begin.toSec();
@@ -442,6 +447,7 @@ float OcclusionCulling::calcCoveragePercent(pcl::PointCloud<pcl::PointXYZ>::Ptr 
 
     return coverage_percentage;
 }
+
 double OcclusionCulling::calcAvgAccuracy(pcl::PointCloud<pcl::PointXYZ> pointCloud)
 {
     double avgAccuracy;

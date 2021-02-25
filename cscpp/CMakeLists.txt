@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project( cscpp )
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O1")
+set(CMAKE_BUILD_TYPE Release) # Release or Debug
+add_definitions(-std=c++11)
+add_definitions(-std=c++14)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
 SET(CMAKE_CXX_FLAGS "-frounding-math" )
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -48,7 +51,7 @@ catkin_package(
 )
 
 include_directories(${PCL_INCLUDE_DIRS} ${OPENMP_INCLUDE_DIRS})
-link_directories(${PCL_LIBRARY_DIRS})
+link_directories(${PCL_LIBRARY_DIRS} ${sspp_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
 
@@ -111,7 +114,7 @@ else ()
     add_library(occlusion_culling src/occlusion_culling.cpp)
     target_link_libraries(occlusion_culling frustum_culling voxel_grid_occlusion_estimation ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
-    add_executable(coverage_heuristic_test src/coverage_heuristic_test.cpp src/coverage_path_planning_heuristic.cpp)
+    add_executable(coverage_heuristic_test src/coverage_heuristic_test.cpp src/coverage_path_planning_heuristic.cpp src/get_params.cpp include/cscpp/get_params.h)
     target_include_directories(coverage_heuristic_test PUBLIC include ${catkin_INCLUDE_DIRS} /usr/local/cuda/include/)
     target_link_libraries(coverage_heuristic_test SSPathPlanner
         -lgmp -lmpfr

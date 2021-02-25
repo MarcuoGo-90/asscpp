@@ -24,12 +24,12 @@
 namespace SSPP
 {
 
-CoveragePathPlanningHeuristic::CoveragePathPlanningHeuristic(ros::NodeHandle & nh, std::string collisionCheckModelP, std::string occlusionCullingModelN, bool d, bool gradualV, int hType)
+CoveragePathPlanningHeuristic::CoveragePathPlanningHeuristic(ros::NodeHandle & nh, std::string collisionCheckModelP, std::string occlusionCullingModelN, bool d, bool gradualV, int hType, int HorizFOV, int VertFOV, double NearPlaneDist, double FarPlaneDist, double voxelresolution)
 {
 
     loadOBJFile(collisionCheckModelP.c_str(), modelPoints, triangles);
     cgalTree             = new Tree1(triangles.begin(),triangles.end());
-    occlussionCulling    = new OcclusionCulling(nh, occlusionCullingModelN);
+    occlussionCulling    = new OcclusionCulling(nh, occlusionCullingModelN, HorizFOV, VertFOV, NearPlaneDist, FarPlaneDist,voxelresolution);
 //     meshSurface          = new MeshSurface(nh);
     debug                = d;
     gradualVisualization = gradualV;
@@ -46,14 +46,15 @@ CoveragePathPlanningHeuristic::CoveragePathPlanningHeuristic(ros::NodeHandle & n
     accuracySum          = 0.0;
     extraCovSum          = 0.0;
     extraAreaSum         = 0.0;
-    volumetricVoxelRes   = 0.5;
+    volumetricVoxelRes   = voxelresolution; // change the voxel resolution to adjust the fidelity of the Occlusion. Also at occlusion_culling.cpp line 41
     accW                 = 0.8;
-    distW                = 0.5;
+    distW                = 0.5; 
     covW                 = 1;
     angleW               = 0.2;
     selectedPointsNum    = 0;
-    voxelResForConn      = 0.5;
+    voxelResForConn      = voxelresolution; // change the voxel resolution to adjust the fidelity of the Occlusion. Also at occlusion_culling.cpp line 41
     maxConnRadius        = std::sqrt((4.5*4.5) + (4.5*4.5)) + 0.01;
+    double maxCov; 
     //area
 //     Triangles aircraftCGALT ;
 //     meshSurface->loadOBJFile(collisionCheckModelP.c_str(), modelPoints, aircraftCGALT);
@@ -265,6 +266,21 @@ bool CoveragePathPlanningHeuristic::terminateConditionReached(Node *node)
 
     if (debug)
         std::cout<<"Delta Coverage:"<<deltaCoverage<<"\n";
+    // Define parent Node for root node
+    double parCov;
+    if (!node->parent) // if the node doesn't have a parent (it's the root), give initial values for parent coverage and max coverage
+    {
+        parCov = 0.0;
+        maxCov = 0.0;  
+    }
+    else
+        parCov = node->parent->coverage;
+    // Define max coverage as the current node's coverage if it's more than it's parent's coverage and more than the current max coverage
+    if (node->coverage > parCov && (node->coverage > maxCov)) 
+        maxCov = node->coverage;
+    // std::cout<<"Parent Coverage:"<<parCov<<"\n";
+    // std::cout<<"Current Coverage:"<<node->coverage<<"\n";
+    // std::cout<<"Max Coverage:"<<maxCov<<"\n";
 
     if ( deltaCoverage <= coverageTolerance)
     {
@@ -274,10 +290,17 @@ bool CoveragePathPlanningHeuristic::terminateConditionReached(Node *node)
 
         return true;
     }
+    else if (node->coverage < maxCov) // This will stop the program once the total coverage starts to decrease
+    {
+        std::cout<<"The path has reached the max coverage for this configuration: "<<maxCov<<"%\n";
+        return true; 
+    }
     else
     {
         if(gradualVisualization)
+        {
             displayGradualProgress(node);
+        }
         return false;
     }
 }
@@ -451,7 +474,7 @@ void CoveragePathPlanningHeuristic::calculateHeuristic(Node *node)
         node->h_value  = 0;
         node->g_value  = 0;
 
-        double f=0,d,c,a,dPar;
+        double f=0,d,c,a,dPar; // f is cost/reward function, d is distance, c is extra coverage, a is accuracy
 
         // distance
         d = Dist(node->pose.p,node->parent->pose.p);
@@ -463,7 +486,6 @@ void CoveragePathPlanningHeuristic::calculateHeuristic(Node *node)
             std::cout<<"parent distance :"<<node->parent->distance<<" current node distance: "<<node->distance<<"\n";
             std::cout<<"Calculated local distance d:"<<d<<" comulative distance: "<<node->distance<<"\n";
         }
-
 
         if(d!=0.0){
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -751,9 +773,10 @@ void CoveragePathPlanningHeuristic::calculateHeuristic(Node *node)
                 normAngle = angle/(2*M_PI);
 
                 // 5- function
-                double localE = node->totalEntroby- node->parent->totalEntroby;
+                double localE = node->totalEntroby- node->parent->totalEntroby; //Negative Number
 //                f = node->totalEntroby + extraVolume + normDist +normAngle;
-                f = node->parent->f_value+localE*std::exp(d*-0.2);//*(normAngle);
+                // f = node->parent->f_value+localE*std::exp(d*-0.2); //*normAngle ORIGINAL
+                f = node->parent->f_value+localE*std::exp(d*-0.2)+2*normAngle;//Added*(normAngle);
 //                std::cout<<"heuristic value: "<<f<<"local Entropy: "<<localE<<" distance: "<<d<<std::endl;
 //                std::cout<<"Total Entroby: "<<node->totalEntroby<<std::endl;
             }
@@ -1080,7 +1103,8 @@ void CoveragePathPlanningHeuristic::calculateHeuristic(Node *node)
                 //4- function
                 double localE = node->totalEntroby-node->parent->totalEntroby;
 //                f = node->totalEntroby+ extraVolume +normAngle;
-                f = node->parent->f_value+localE*std::exp(d*-0.2);//*(normAngle);
+                // f = node->parent->f_value+localE*std::exp(d*-0.2);//*(normAngle); ORIGINAL
+                f = node->parent->f_value+localE*std::exp(d*-0.2)+2*normAngle; //*(normAngle);
 //                std::cout<<"heuristic value: "<<f<<"local Entropy: "<<localE<<" distance: "<<d<<std::endl;
 //                std::cout<<"Total Entroby: "<<node->totalEntroby<<std::endl;
             }
@@ -1088,7 +1112,7 @@ void CoveragePathPlanningHeuristic::calculateHeuristic(Node *node)
         node->f_value  = f;
         if(debug)
         {
-            std::cout<<"\nchild collective cloud after filtering size: "<<node->cloud_filtered->size()<<"\n";
+            std::cout<<"child collective cloud after filtering size: "<<node->cloud_filtered->size()<<"\n";
             std::cout<<"parent coverage :"<<node->parent->coverage<<" current node coverage: "<<node->coverage<<"\n";
             std::cout<<"extra coverage c : "<<c<<"\n";
             std::cout<<"parent f value calculation: "<<f<<"\n";
@@ -1247,7 +1271,7 @@ void CoveragePathPlanningHeuristic::calculateHeuristic(Node *node)
     }
 
     if(debug)
-        std::cout<<"<<<<<<finished node heuristic calculation>>>>>>"<<std::endl;
+        std::cout<<"<<<<<<finished node heuristic calculation>>>>>>\n\n"<<std::endl;
 }
 void CoveragePathPlanningHeuristic::displayGradualProgress(Node *node)
 {
@@ -1308,8 +1332,8 @@ void CoveragePathPlanningHeuristic::displayGradualProgress(Node *node)
     //########display FOV##########
     //        if (coveI != 0 && %10==0)
 //    {
-        for(int i =0; i<node->senPoses.size(); i++)
-            occlussionCulling->visualizeFOV(node->senPoses[i].p);
+    for(int i =0; i<node->senPoses.size(); i++)
+        occlussionCulling->visualizeFOV(node->senPoses[i].p);
 //    }
 
     //########display the path every 1% coverage########
@@ -1319,7 +1343,6 @@ void CoveragePathPlanningHeuristic::displayGradualProgress(Node *node)
     {
         if (debug == true)
             std::cout<<"INSIDE PUBLISHING"<<"\n";
-
 
         //  publish path and pring the path each 1%
         ofstream path_file;
@@ -1449,5 +1472,46 @@ void CoveragePathPlanningHeuristic::loadOBJFile(const char* filename, std::vecto
         }
     }
 }
+
+// Added Function
+// bool CoveragePathPlanningHeuristic::CheckRepeatPoint(std::vector<Eigen::Vector3f>& ListofNodes, Eigen::Vector3f nodecoords)
+// {   
+//     int ListSize = ListofNodes.size();
+//     // std::cout<<" the list size is  = "<<ListSize<<" \n"; // Added line
+//     int x = nodecoords[0];
+//     int y = nodecoords[1];
+//     int z = nodecoords[2];
+//     // std::cout<<" base coord is  = "<<x<<" " << y <<" " << z <<" \n"; // Added line
+//     bool match; 
+//     int i = 0; 
+//     while (i <=ListSize)
+//     {   
+//         int currX = ListofNodes[i][0];
+//         int currY = ListofNodes[i][1];
+//         int currZ = ListofNodes[i][2];
+//         // std::cout<<" the current coord is  = "<<currX<<" " << currY <<" " << currZ <<" \n"; // Added line
+//         // std::cout<<" Inside the loop, the List of Nodes is = "<<ListofNodes.size()<<" nodes Long\n"; // Added line 
+//                 // for (auto i = ListofNodes.begin(); i != ListofNodes.end(); ++i){ // Added line 
+//                 //     std::cout << *i << ' '; // Added line 
+//                 // }
+
+//         if((x==currX) && (y==currY) && (z==currZ))
+//         {    match = true;
+//              break;
+//         } 
+//         else
+//         {   match = false;
+//             i++;
+//         }
+
+//     }
+
+//     // if(match)
+//     //      std::cout<<" This node is repeated\n"; // Added line
+//     // else 
+//     //     std::cout<<" This node is unique\n"; // Added line
+
+//     return match; 
+// }    
 
 }
