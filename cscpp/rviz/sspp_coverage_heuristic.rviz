@@ -107,7 +107,7 @@ Visualization Manager:
       Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
-      Size (Pixels): 0.05
+      Size (Pixels): 5
       Size (m): 0.5
       Style: Points
       Topic: occlusion_free_cloud
@@ -137,7 +137,7 @@ Visualization Manager:
       Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
-      Size (Pixels): 0.04
+      Size (Pixels): 4
       Size (m): 0.6000000238418579
       Style: Points
       Topic: original_point_cloud
