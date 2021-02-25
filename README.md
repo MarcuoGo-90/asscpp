@@ -4,10 +4,16 @@ Adaptive Search Space Coverage Path Planning
 # Installation
 In your [catkin_ws](http://wiki.ros.org/catkin/Tutorials/create_a_workspace):
 
-'git clone --recurse-submodules https://github.com/psilberberg/asscpp.git'
+`git clone --recurse-submodules https://github.com/psilberberg/asscpp.git`
 
 ## Dependencies
 In addition to `ros-noetic-desktop-full`, please install:
+[rviz_visual_tools](https://github.com/PickNikRobotics/rviz_visual_tools )
+[octomap](http://wiki.ros.org/octomap)
+[octomap_mapping](http://wiki.ros.org/octomap_mapping )
+[octomap_rviz_plugins](http://wiki.ros.org/octomap_rviz_plugins)
+[CGAL](https://www.cgal.org/download/linux.html)
+
 ```
 sudo apt-get install ros-noetic-rviz-visual-tools ros-noetic-octomap ros-noetic-octomap-mapping ros-noetic-octomap-rviz-plugins libcgal-dev
 ```
