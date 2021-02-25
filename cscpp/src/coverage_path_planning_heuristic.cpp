@@ -20,7 +20,6 @@
  *   51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307, USA.          *
  ***************************************************************************/
 #include "cscpp/coverage_path_planning_heuristic.h"
-
 namespace SSPP
 {
 

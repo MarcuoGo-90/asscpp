@@ -18,9 +18,10 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307, USA.          *
- ***************************************************************************/
+ **********a*****************************************************************/
 
 #include "cscpp/get_params.h"
+#include "sspp/rviz_drawing_tools.h"
 #include "sspp/pathplanner.h"
 #include "ros/ros.h"
 #include <ros/package.h>
@@ -30,7 +31,7 @@
 #include <geometry_msgs/PoseArray.h>
 #include <cscpp/occlusion_culling.h>
 #include "cscpp/coverage_path_planning_heuristic.h"
-#include "sspp/rviz_drawing_tools.h"
+
 
 using namespace SSPP;
  

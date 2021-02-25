@@ -1,0 +1,8 @@
+prefix=/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/devel
+
+Name: cscpp
+Description: Description of cscpp
+Version: 1.0.0
+Cflags: -I/home/seg/git_catkin_ws/src/asscpp/cscpp/include
+Libs: -L${prefix}/lib -locclusion_culling
+Requires: roscpp pcl_ros

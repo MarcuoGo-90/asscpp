@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: cscpp
+Description: Description of cscpp
+Version: 1.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -locclusion_culling
+Requires: roscpp pcl_ros
