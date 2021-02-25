@@ -11,8 +11,8 @@ In addition to `ros-noetic-desktop-full`, please install:
 [rviz_visual_tools](https://github.com/PickNikRobotics/rviz_visual_tools ), 
 [octomap](http://wiki.ros.org/octomap), 
 [octomap_mapping](http://wiki.ros.org/octomap_mapping ), 
-[octomap_rviz_plugins](http://wiki.ros.org/octomap_rviz_plugins), 
-[CGAL](https://www.cgal.org/download/linux.html), 
+[octomap_rviz_plugins](http://wiki.ros.org/octomap_rviz_plugins), and
+[CGAL](https://www.cgal.org/download/linux.html)
 
 ```
 sudo apt-get install ros-noetic-rviz-visual-tools ros-noetic-octomap ros-noetic-octomap-mapping ros-noetic-octomap-rviz-plugins libcgal-dev
