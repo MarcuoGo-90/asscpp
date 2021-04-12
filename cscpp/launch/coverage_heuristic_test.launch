@@ -32,7 +32,7 @@
         <param name="max_dist" type="double" value="3.0" />  <!-- Make sure FarPlaneDist supports this distance -->
         <param name="res_start" type="double" value="1.5" />
         <param name="res_decrement" type="double" value="0.5" />
-        <param name="connection_radius" type="double" value="2.2" />
+        <param name="connection_radius" type="double" value="2.3" />
         <param name="Orientation_Resolution" type="double" value="45" />
         <param name="gridstartX" type="double" value="-20.0" />   <!-- -->
         <param name="gridstartY" type="double" value="-10.0" />   <!-- -->

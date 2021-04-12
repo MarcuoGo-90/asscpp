@@ -1,21 +1,39 @@
-/snap/clion/139/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" /home/seg/git_catkin_ws/src/asscpp/cscpp
+/snap/clion/149/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" /home/seg/git_catkin_ws/src/asscpp/cscpp
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Warning (dev) at CMakeLists.txt:2 (project):
+  Policy CMP0048 is not set: project() command manages VERSION variables.
+  Run "cmake --help-policy CMP0048" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The following variable(s) would be set to empty:
+
+    CMAKE_PROJECT_VERSION
+    CMAKE_PROJECT_VERSION_MAJOR
+    CMAKE_PROJECT_VERSION_MINOR
+    CMAKE_PROJECT_VERSION_PATCH
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
 -- The C compiler identification is GNU 9.3.0
 -- The CXX compiler identification is GNU 9.3.0
--- Check for working C compiler: /usr/lib/ccache/cc
--- Check for working C compiler: /usr/lib/ccache/cc - works
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/lib/ccache/cc - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
--- Check for working CXX compiler: /usr/lib/ccache/c++
--- Check for working CXX compiler: /usr/lib/ccache/c++ - works
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/lib/ccache/c++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Using CATKIN_DEVEL_PREFIX: /home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/devel
--- Using CMAKE_PREFIX_PATH: /home/seg/git_catkin_ws/devel;/opt/ros/noetic
--- This workspace overlays: /home/seg/git_catkin_ws/devel;/opt/ros/noetic
+-- Using CMAKE_PREFIX_PATH: 
 -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.5", minimum required is "3") 
 -- Using PYTHON_EXECUTABLE: /usr/bin/python3
 -- Using Debian Python package layout
@@ -26,24 +44,55 @@
 -- Forcing gtest/gmock from source, though one was otherwise available.
 -- Found gtest sources under '/usr/src/googletest': gtests will be built
 -- Found gmock sources under '/usr/src/googletest': gmock will be built
+CMake Deprecation Warning at /usr/src/googletest/CMakeLists.txt:4 (cmake_minimum_required):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at /usr/src/googletest/googlemock/CMakeLists.txt:45 (cmake_minimum_required):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at /usr/src/googletest/googletest/CMakeLists.txt:56 (cmake_minimum_required):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
 -- Found PythonInterp: /usr/bin/python3 (found version "3.8.5") 
--- Found Threads: TRUE  
 -- Using Python nosetests: /usr/bin/nosetests3
 -- catkin 0.8.9
 -- BUILD_SHARED_LIBS is on
--- Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
--- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found version "1.71.0")  
--- Using header-only CGAL
--- Targetting Unix Makefiles
--- Using /usr/lib/ccache/c++ compiler.
--- Found GMP: /usr/lib/x86_64-linux-gnu/libgmp.so  
--- Found MPFR: /usr/lib/x86_64-linux-gnu/libmpfr.so  
--- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found suitable version "1.71.0", minimum required is "1.48")  
--- Boost include dirs: /usr/include
--- Boost libraries:    
--- Using gcc version 4 or later. Adding -frounding-math
-CUDA_TOOLKIT_ROOT_DIR not found or specified
--- Could NOT find CUDA (missing: CUDA_TOOLKIT_ROOT_DIR CUDA_NVCC_EXECUTABLE CUDA_INCLUDE_DIRS CUDA_CUDART_LIBRARY) 
--- Configuring done
--- Generating done
--- Build files have been written to: /home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release
+Traceback (most recent call last):
+  File "/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/catkin_generated/generate_cached_setup.py", line 12, in <module>
+    from catkin.environment_cache import generate_environment_script
+ModuleNotFoundError: No module named 'catkin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/catkin_generated/generate_cached_setup.py", line 20, in <module>
+    from catkin.environment_cache import generate_environment_script
+ModuleNotFoundError: No module named 'catkin'
+CMake Error at /opt/ros/noetic/share/catkin/cmake/safe_execute_process.cmake:11 (message):
+  execute_process(/usr/bin/python3
+  "/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/catkin_generated/generate_cached_setup.py")
+  returned error code 1
+Call Stack (most recent call first):
+  /opt/ros/noetic/share/catkin/cmake/all.cmake:208 (safe_execute_process)
+  /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:16 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/CMakeOutput.log".
+See also "/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/CMakeError.log".
