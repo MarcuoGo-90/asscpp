@@ -1,8 +1,0 @@
-//
-// Created by seg on 4/12/21.
-//
-
-#ifndef CSCPP_CALC_POINTING_ANGLE_H
-#define CSCPP_CALC_POINTING_ANGLE_H
-
-#endif //CSCPP_CALC_POINTING_ANGLE_H

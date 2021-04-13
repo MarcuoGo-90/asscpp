@@ -129,7 +129,5 @@ else ()
         #CoverageHeuristic
         )
 
-    add_executable(calc_pointing_angles src/calc_pointing_angle.cpp)
-    target_link_libraries(calc_pointing_angles ${PCL_LIBRARIES})
 
 endif (CUDA_FOUND)
