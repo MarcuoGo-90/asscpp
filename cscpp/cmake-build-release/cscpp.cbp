@@ -47,6 +47,78 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="calc_pointing_angles">
+				<Option output="/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/devel/lib/cscpp/calc_pointing_angles" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/devel/lib/cscpp"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DROS_BUILD_SHARED_LIBS=1"/>
+					<Add option="-DROS_PACKAGE_NAME=&quot;cscpp&quot;"/>
+					<Add option="-DROSCONSOLE_BACKEND_LOG4CXX"/>
+					<Add option="-DUSE_CUDA=0"/>
+					<Add directory="/home/seg/git_catkin_ws/src/asscpp/cscpp/include"/>
+					<Add directory="/home/seg/git_catkin_ws/devel/.private/sspp/include"/>
+					<Add directory="/home/seg/git_catkin_ws/src/asscpp/sspp/include"/>
+					<Add directory="/opt/ros/noetic/include"/>
+					<Add directory="/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/include/pcl-1.10"/>
+					<Add directory="/usr/include/vtk-7.1"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/include/OGRE"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 calc_pointing_angles"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="calc_pointing_angles/fast">
+				<Option output="/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/devel/lib/cscpp/calc_pointing_angles" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/devel/lib/cscpp"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DROS_BUILD_SHARED_LIBS=1"/>
+					<Add option="-DROS_PACKAGE_NAME=&quot;cscpp&quot;"/>
+					<Add option="-DROSCONSOLE_BACKEND_LOG4CXX"/>
+					<Add option="-DUSE_CUDA=0"/>
+					<Add directory="/home/seg/git_catkin_ws/src/asscpp/cscpp/include"/>
+					<Add directory="/home/seg/git_catkin_ws/devel/.private/sspp/include"/>
+					<Add directory="/home/seg/git_catkin_ws/src/asscpp/sspp/include"/>
+					<Add directory="/opt/ros/noetic/include"/>
+					<Add directory="/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/include/pcl-1.10"/>
+					<Add directory="/usr/include/vtk-7.1"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/include/OGRE"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 calc_pointing_angles/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="occlusion_culling">
 				<Option output="/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/devel/lib/libocclusion_culling.so" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release"/>
@@ -1718,6 +1790,9 @@
 		</Build>
 		<Unit filename="/home/seg/git_catkin_ws/src/asscpp/cscpp/include/cscpp/get_params.h">
 			<Option target="coverage_heuristic_test"/>
+		</Unit>
+		<Unit filename="/home/seg/git_catkin_ws/src/asscpp/cscpp/src/calc_pointing_angle.cpp">
+			<Option target="calc_pointing_angles"/>
 		</Unit>
 		<Unit filename="/home/seg/git_catkin_ws/src/asscpp/cscpp/src/coverage_heuristic_test.cpp">
 			<Option target="coverage_heuristic_test"/>

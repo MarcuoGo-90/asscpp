@@ -90,7 +90,7 @@ CMAKE_CODEBLOCKS_MAKE_ARGUMENTS:STRING=-j4
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //CXX compiler
-CMAKE_CXX_COMPILER:STRING=/usr/lib/ccache/c++
+CMAKE_CXX_COMPILER:FILEPATH=/usr/lib/ccache/c++
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -116,7 +116,7 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //C compiler
-CMAKE_C_COMPILER:STRING=/usr/lib/ccache/cc
+CMAKE_C_COMPILER:FILEPATH=/usr/lib/ccache/cc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -765,7 +765,7 @@ Boost_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_DIR
 Boost_DIR-ADVANCED:INTERNAL=1
 //catkin environment
-CATKIN_ENV:INTERNAL=
+CATKIN_ENV:INTERNAL=/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-debug/catkin_generated/env_cached.sh
 CATKIN_TEST_RESULTS_DIR:INTERNAL=/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-debug/test_results
 //ADVANCED property for variable: CGAL_Boost_USE_STATIC_LIBS
 CGAL_Boost_USE_STATIC_LIBS-ADVANCED:INTERNAL=1
@@ -1019,11 +1019,11 @@ CUDA_cufft_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CUDA_cufftemu_LIBRARY
 CUDA_cufftemu_LIBRARY-ADVANCED:INTERNAL=1
 //Location of make2cmake.cmake
-CUDA_make2cmake:INTERNAL=/snap/clion/139/bin/cmake/linux/share/cmake-3.17/Modules/FindCUDA/make2cmake.cmake
+CUDA_make2cmake:INTERNAL=/snap/clion/149/bin/cmake/linux/share/cmake-3.19/Modules/FindCUDA/make2cmake.cmake
 //Location of parse_cubin.cmake
-CUDA_parse_cubin:INTERNAL=/snap/clion/139/bin/cmake/linux/share/cmake-3.17/Modules/FindCUDA/parse_cubin.cmake
+CUDA_parse_cubin:INTERNAL=/snap/clion/149/bin/cmake/linux/share/cmake-3.19/Modules/FindCUDA/parse_cubin.cmake
 //Location of run_nvcc.cmake
-CUDA_run_nvcc:INTERNAL=/snap/clion/139/bin/cmake/linux/share/cmake-3.17/Modules/FindCUDA/run_nvcc.cmake
+CUDA_run_nvcc:INTERNAL=/snap/clion/149/bin/cmake/linux/share/cmake-3.19/Modules/FindCUDA/run_nvcc.cmake
 //Details about finding Boost
 FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake][c ][v1.71.0(1.48)]
 //Details about finding GMP
