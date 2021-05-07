@@ -187,19 +187,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named calc_pointing_angles
-
-# Build rule for target.
-calc_pointing_angles: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 calc_pointing_angles
-.PHONY : calc_pointing_angles
-
-# fast build rule for target.
-calc_pointing_angles/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/calc_pointing_angles.dir/build.make CMakeFiles/calc_pointing_angles.dir/build
-.PHONY : calc_pointing_angles/fast
-
-#=============================================================================
 # Target rules for targets named occlusion_culling
 
 # Build rule for target.
@@ -1772,33 +1759,6 @@ gtest_main/fast:
 	$(MAKE) $(MAKESILENT) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-src/calc_pointing_angle.o: src/calc_pointing_angle.cpp.o
-
-.PHONY : src/calc_pointing_angle.o
-
-# target to build an object file
-src/calc_pointing_angle.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/calc_pointing_angles.dir/build.make CMakeFiles/calc_pointing_angles.dir/src/calc_pointing_angle.cpp.o
-.PHONY : src/calc_pointing_angle.cpp.o
-
-src/calc_pointing_angle.i: src/calc_pointing_angle.cpp.i
-
-.PHONY : src/calc_pointing_angle.i
-
-# target to preprocess a source file
-src/calc_pointing_angle.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/calc_pointing_angles.dir/build.make CMakeFiles/calc_pointing_angles.dir/src/calc_pointing_angle.cpp.i
-.PHONY : src/calc_pointing_angle.cpp.i
-
-src/calc_pointing_angle.s: src/calc_pointing_angle.cpp.s
-
-.PHONY : src/calc_pointing_angle.s
-
-# target to generate assembly for a file
-src/calc_pointing_angle.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/calc_pointing_angles.dir/build.make CMakeFiles/calc_pointing_angles.dir/src/calc_pointing_angle.cpp.s
-.PHONY : src/calc_pointing_angle.cpp.s
-
 src/coverage_heuristic_test.o: src/coverage_heuristic_test.cpp.o
 
 .PHONY : src/coverage_heuristic_test.o
@@ -2087,7 +2047,6 @@ help:
 	@echo "... visualization_msgs_generate_messages_lisp"
 	@echo "... visualization_msgs_generate_messages_nodejs"
 	@echo "... visualization_msgs_generate_messages_py"
-	@echo "... calc_pointing_angles"
 	@echo "... coverage_heuristic_test"
 	@echo "... frustum_culling"
 	@echo "... gmock"
@@ -2096,9 +2055,6 @@ help:
 	@echo "... gtest_main"
 	@echo "... occlusion_culling"
 	@echo "... voxel_grid_occlusion_estimation"
-	@echo "... src/calc_pointing_angle.o"
-	@echo "... src/calc_pointing_angle.i"
-	@echo "... src/calc_pointing_angle.s"
 	@echo "... src/coverage_heuristic_test.o"
 	@echo "... src/coverage_heuristic_test.i"
 	@echo "... src/coverage_heuristic_test.s"

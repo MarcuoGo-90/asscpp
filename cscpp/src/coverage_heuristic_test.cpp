@@ -34,7 +34,7 @@
 
 
 using namespace SSPP;
- 
+
 int main( int argc, char **  argv)
 {
     ros::init(argc, argv, "path_planning");
@@ -132,7 +132,7 @@ int main( int argc, char **  argv)
     std::cout<<"\nSearch Space Connections: "<<searchSpaceConnections.size() << '\n';
     std::vector<geometry_msgs::Point> searchSpaceNodes = pathPlanner->getSearchSpace();
     std::cout<<"\n---->>> Total Nodes in search Space = "<<searchSpaceNodes.size()<<'\n';
-    
+
     std::vector<geometry_msgs::PoseArray> sensorsPoseSS;
     geometry_msgs::PoseArray robotPoseSS;
     std::cout<<"\nGetting Robot Poses";fflush(stdout);
@@ -277,8 +277,8 @@ int main( int argc, char **  argv)
     // geometry_msgs::Point linePoint2;
     // std::vector<geometry_msgs::Point> pathSegments2;
     // geometry_msgs::PoseArray sensorPose2;
-    // geometry_msgs::Pose sensPoses2; 
-    // ifstream file; 
+    // geometry_msgs::Pose sensPoses2;
+    // ifstream file;
     // file.open("/home/antuser/catkin_ws/src/asscpp/cscpp/F15WaypointFile.txt");
     /// ***File needs to be modified to repeat all but the last waypoint twice ***
 
@@ -286,16 +286,16 @@ int main( int argc, char **  argv)
     // {
     //     while(file >> wait >> X >> Y >> Z >> YAW)
     //     {
-    //         std::cout<< wait <<" " << X <<" " << Y <<" " << Z << " "<< YAW << '\n'; 
-        
+    //         std::cout<< wait <<" " << X <<" " << Y <<" " << Z << " "<< YAW << '\n';
+
     //         linePoint2.x = X;
     //         linePoint2.y = Y;
     //         linePoint2.z = Z;
     //         pathSegments2.push_back(linePoint2);
-    //         double yaw2, pitch2, roll2; 
+    //         double yaw2, pitch2, roll2;
     //         pitch2 = 0.523599; // 30 deg
-    //         roll2 = 0; 
-    //         yaw2 = YAW; // Not sure why you don't convert to radians? 
+    //         roll2 = 0;
+    //         yaw2 = YAW; // Not sure why you don't convert to radians?
 
     //         double cy = cos(yaw2 * 0.5);
     //         double sy = sin(yaw2 * 0.5);
@@ -310,17 +310,17 @@ int main( int argc, char **  argv)
     //         y = cr * sp * cy + sr * cp * sy;
     //         z = cr * cp * sy - sr * sp * cy;
 
-    //         sensPoses2.position.x = X; 
-    //         sensPoses2.position.y = Y; 
-    //         sensPoses2.position.z = Z; 
-    //         sensPoses2.orientation.x = x; 
+    //         sensPoses2.position.x = X;
+    //         sensPoses2.position.y = Y;
+    //         sensPoses2.position.z = Z;
+    //         sensPoses2.orientation.x = x;
     //         sensPoses2.orientation.y = y;
     //         sensPoses2.orientation.z = z;
     //         sensPoses2.orientation.w = w;
     //         sensorPose2.poses.push_back(sensPoses2);
     //     }
-    //     file.close(); 
-    // }    
+    //     file.close();
+    // }
     // else
     //     std::cout<<"file is not open"<<'\n';
     // visualization_msgs::Marker pathMarker2 = drawLines(pathSegments2,2000,1,10000000,0.1); //20000
@@ -376,11 +376,7 @@ int main( int argc, char **  argv)
             }
         }
 
-        sensor_msgs::PointCloud2 cloud1;
-        pcl::toROSMsg(*originalCloudPtr, cloud1); //cloud of original (white) using original cloud
-        cloud1.header.stamp = ros::Time::now();
-        cloud1.header.frame_id = "map"; //change according to the global frame please!!
-        originalCloudPub.publish(cloud1);
+
 
         sensor_msgs::PointCloud2 cloud2;
         pcl::toROSMsg(*coveredCloudPtr, cloud2); //cloud of original (white) using original cloud

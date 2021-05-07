@@ -3,7 +3,7 @@
   <node pkg="tf" type="static_transform_publisher" name="base_to_world" args="-7 0 0 0 0 0 /base /map 30" />
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find f35sim)/worlds/F35origin.world" />  <!-- looks for world in ~catkin_ws/src/f35sim/worlds and loads it ..was F35_iris_1cam_nochase -->
+    <arg name="world_name" value="$(find cscpp)/worlds/F35origin.world" />  <!-- looks for world in ~catkin_ws/src/f35sim/worlds and loads it ..was F35_iris_1cam_nochase -->
     <arg name="debug" value="false" />
     <arg name="gui" value="true" />
     <arg name="paused" value="false" />

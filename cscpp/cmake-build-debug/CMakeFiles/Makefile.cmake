@@ -358,7 +358,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/calc_pointing_angles.dir/DependInfo.cmake"
   "CMakeFiles/occlusion_culling.dir/DependInfo.cmake"
   "CMakeFiles/frustum_culling.dir/DependInfo.cmake"
   "CMakeFiles/voxel_grid_occlusion_estimation.dir/DependInfo.cmake"

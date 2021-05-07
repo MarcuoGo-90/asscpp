@@ -1,7 +1,6 @@
 /home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/install/strip.dir
 /home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/install/local.dir
 /home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/rebuild_cache.dir
-/home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/calc_pointing_angles.dir
 /home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/occlusion_culling.dir
 /home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/frustum_culling.dir
 /home/seg/git_catkin_ws/src/asscpp/cscpp/cmake-build-release/CMakeFiles/voxel_grid_occlusion_estimation.dir
