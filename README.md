@@ -19,12 +19,16 @@ sudo apt-get install ros-noetic-rviz-visual-tools ros-noetic-octomap ros-noetic-
 ```
 
 To run simulation, you'll also need [Ardupilot](https://ardupilot.org/dev/docs/building-setup-linux.html)
+
 `git clone https://github.com/ArduPilot/ardupilot.git `
+
 `cd ardupilot`
+
 `git submodule update --init --recursive`
 
 ## Running Simulation
 Ensure your catkin workspace is sourced:
+
 `cd catkin_ws`
 `source devel/setup.bash`
 
