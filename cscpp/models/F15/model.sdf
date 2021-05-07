@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+<model name="F15">
+  <static>true</static>
+  <link name="F15_link">
+
+  <visual name="F15">
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <mesh><uri>model://F15/meshes/F15.stl
+	</uri><scale>1.0 1.0 1.0</scale></mesh>
+    </geometry>
+  </visual>
+
+  <collision name="F15">
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <mesh><uri>model://F15/meshes/F15.stl</uri><scale>1.0 1.0 1.0 </scale></mesh>
+    </geometry>
+  </collision>
+
+  </link>
+</model>
+</sdf>
+

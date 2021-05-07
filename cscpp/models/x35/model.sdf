@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+<model name="x35">
+  <static>true</static>
+  <link name="x35_link">
+
+  <visual name="x35">
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <mesh><uri>model://x35/meshes/x35.stl</uri><scale>0.000112 0.000112 0.000112</scale></mesh>
+    </geometry>
+  </visual>
+
+  <collision name="x35">
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <mesh><uri>model://x35/meshes/x35.stl</uri><scale>0.000112 0.000112 0.000112</scale></mesh>
+    </geometry>
+  </collision>
+
+  </link>
+</model>
+</sdf>
+

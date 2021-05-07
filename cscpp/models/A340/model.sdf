@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+<model name="A340">
+  <static>true</static>
+  <link name="A340_link">
+
+  <visual name="A3405">
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <mesh><uri>model://A340/meshes/A340.stl</uri><scale>1.0 1.0 1.0 </scale></mesh>
+    </geometry>
+  </visual>
+
+  <collision name="A340">
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <mesh><uri>model://A340/meshes/A340.stl</uri><scale>1.0 1.0 1.0 </scale></mesh>
+    </geometry>
+  </collision>
+
+  </link>
+</model>
+</sdf>
+
