@@ -30,6 +30,10 @@ Also, add the path to the models to your bashrc file:
 
 `echo 'export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/asscpp/cscpp/models:$GAZEBO_MODEL_PATH' >> ~/.bashrc`
 
+
+Finally, you'll also need Mission Planner. Instructions on how to install MP on linux by [IntelligentQuads](https://github.com/Intelligent-Quads/iq_tutorials/blob/master/docs/installing_mission_on_Linux.md)
+
+
 ## Running Simulation
 Ensure your catkin workspace is sourced:
 
@@ -43,11 +47,11 @@ Start the launch file:
 
 In a NEW terminal, start ArduPilot SITL: 
 
+`cd catkin_ws/src/asscpp/cscpp/ && ./startsitl.sh`
+
+or
+
 `cd ~/ardupilot/ArduCopter/ && sim_vehicle.py -v ArduCopter -f gazebo-iris --console` 
-
-	or 
-
-`.startsitl.sh`
 
 
 In a NEW (third) terminal, start Mission Planner: 
@@ -56,6 +60,7 @@ In a NEW (third) terminal, start Mission Planner:
 
 `mono MissionPlanner.exe`
 
+Now use Mission Planner to drive the UAV around!
 
 ## Citing
 Please cite the following papers when using the work for your research:
