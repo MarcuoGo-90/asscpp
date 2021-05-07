@@ -18,7 +18,15 @@ In addition to `ros-noetic-desktop-full`, please install:
 sudo apt-get install ros-noetic-rviz-visual-tools ros-noetic-octomap ros-noetic-octomap-mapping ros-noetic-octomap-rviz-plugins libcgal-dev
 ```
 ## Running Simulation
+Ensure your catkin workspace is sourced:
+'cd catkin_ws'
+'source devel/setup.bash'
 
+Start the launch file:
+'roslaunch cscpp F35_world.launch'
+
+
+`roslaunch`
 
 ## Citing
 Please cite the following papers when using the work for your research:
