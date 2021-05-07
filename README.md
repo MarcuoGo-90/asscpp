@@ -26,17 +26,33 @@ To run simulation, you'll also need [Ardupilot](https://ardupilot.org/dev/docs/b
 
 `git submodule update --init --recursive`
 
+Also, add the path to the models to your bashrc file:
+
+`echo 'export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/asscpp/cscpp/models:$GAZEBO_MODEL_PATH' >> ~/.bashrc`
+
 ## Running Simulation
 Ensure your catkin workspace is sourced:
 
 `cd catkin_ws`
+
 `source devel/setup.bash`
 
 Start the launch file:
-`roslaunch cscpp F35_world.launch`
+`roslaunch cscpp sim_world.launch`
+
+In a NEW terminal, start ArduPilot SITL: 
+`cd ~/ardupilot/ArduCopter/ && sim_vehicle.py -v ArduCopter -f gazebo-iris --console` 
+
+or 
+
+`.startsitl.sh`
 
 
-`roslaunch`
+In a NEW (third) terminal, start Mission Planner: 
+
+`cd MissionPlanner`
+`mono MissionPlanner.exe`
+
 
 ## Citing
 Please cite the following papers when using the work for your research:
