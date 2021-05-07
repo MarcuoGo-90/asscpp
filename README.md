@@ -2,7 +2,7 @@
 Adaptive Search Space Coverage Path Planning
 
 # Installation
-In your [catkin_ws](http://wiki.ros.org/catkin/Tutorials/create_a_workspace):
+In your [catkin_ws](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)/src:
 
 `git clone --recurse-submodules https://github.com/psilberberg/asscpp.git`
 
