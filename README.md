@@ -19,11 +19,11 @@ sudo apt-get install ros-noetic-rviz-visual-tools ros-noetic-octomap ros-noetic-
 ```
 ## Running Simulation
 Ensure your catkin workspace is sourced:
-'cd catkin_ws'
-'source devel/setup.bash'
+`cd catkin_ws`
+`source devel/setup.bash`
 
 Start the launch file:
-'roslaunch cscpp F35_world.launch'
+`roslaunch cscpp F35_world.launch`
 
 
 `roslaunch`
