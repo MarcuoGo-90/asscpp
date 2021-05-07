@@ -38,12 +38,14 @@ Ensure your catkin workspace is sourced:
 `source devel/setup.bash`
 
 Start the launch file:
+
 `roslaunch cscpp sim_world.launch`
 
 In a NEW terminal, start ArduPilot SITL: 
+
 `cd ~/ardupilot/ArduCopter/ && sim_vehicle.py -v ArduCopter -f gazebo-iris --console` 
 
-or 
+	or 
 
 `.startsitl.sh`
 
@@ -51,6 +53,7 @@ or
 In a NEW (third) terminal, start Mission Planner: 
 
 `cd MissionPlanner`
+
 `mono MissionPlanner.exe`
 
 
