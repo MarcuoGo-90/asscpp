@@ -17,6 +17,10 @@ In addition to `ros-noetic-desktop-full`, please install:
 ```
 sudo apt-get install ros-noetic-rviz-visual-tools ros-noetic-octomap ros-noetic-octomap-mapping ros-noetic-octomap-rviz-plugins libcgal-dev
 ```
+
+To run simulation, you'll also need [Ardupilot](https://ardupilot.org/dev/docs/building-setup-linux.html)
+`git clone https://github.com/ArduPilot/ardupilot.git' 
+
 ## Running Simulation
 Ensure your catkin workspace is sourced:
 `cd catkin_ws`
