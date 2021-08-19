@@ -75,7 +75,6 @@ Please cite the following papers when using the work for your research:
   volume={},
   number={},
   pages={7047-7054}
-}
 ```
 
 
@@ -90,7 +89,6 @@ Please cite the following papers when using the work for your research:
   address="Cham",
   pages="243--266",
   isbn="978-3-030-27541-9"
-}
 ```
 
 [Aircraft Inspection by Multirotor UAV Using Coverage Path Planning](https://ieeexplore.ieee.org/document/9476718)
@@ -104,5 +102,4 @@ Please cite the following papers when using the work for your research:
   number={},
   pages={575-581},
   doi={10.1109/ICUAS51884.2021.9476718}}
-}
 ```
