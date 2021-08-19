@@ -93,3 +93,16 @@ Please cite the following papers when using the work for your research:
 }
 ```
 
+[Aircraft Inspection by Multirotor UAV Using Coverage Path Planning](https://ieeexplore.ieee.org/document/9476718)
+```bibtex
+@INPROCEEDINGS{9476718,
+  author={Silberberg, Patrick and Leishman, Robert C.},
+  booktitle={2021 International Conference on Unmanned Aircraft Systems (ICUAS)}, 
+  title={Aircraft Inspection by Multirotor UAV Using Coverage Path Planning}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={575-581},
+  doi={10.1109/ICUAS51884.2021.9476718}}
+}
+```
